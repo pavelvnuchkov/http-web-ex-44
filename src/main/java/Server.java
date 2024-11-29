@@ -21,7 +21,9 @@ public class Server {
             ExecutorService executorService = Executors.newFixedThreadPool(2);
             while (true) {
                 Socket socket = serverSocket.accept();
-                executorService.execute(() -> { processingMessage(socket);});
+                executorService.execute(() -> {
+                    processingMessage(socket);
+                });
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -32,8 +34,8 @@ public class Server {
 
         System.out.println("Обработчик");
         try (
-        final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        final BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+                final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                final BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
         ) {
 
             // read only request line for simplicity

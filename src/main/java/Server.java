@@ -31,8 +31,6 @@ public class Server {
     }
 
     public void processingMessage(Socket socket) {
-
-        System.out.println("Обработчик");
         try (
                 final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 final BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());

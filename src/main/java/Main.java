@@ -1,4 +1,3 @@
-import com.sun.net.httpserver.Request;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -11,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         Server server = new Server();
         Handler handlerGet = new Handler() {
-            @Override
             public void handle(Request request, BufferedOutputStream responseStream) throws IOException {
                 final var filePath = Path.of(".", "public", request.getRequestURI().toString());
 
@@ -36,7 +34,6 @@ public class Main {
         }
 
         server.addHandler("GET", "/classic.html", new Handler() {
-            @Override
             public void handle(Request request, BufferedOutputStream responseStream) throws IOException {
                 final var filePath = Path.of(".", "public", request.getRequestURI().toString());
                 final var mimeType = Files.probeContentType(filePath);
@@ -62,6 +59,7 @@ public class Main {
                 // TODO: handlers code
             }
         });
+        server.addHandler("POST", "/forms.html", handlerGet);
         server.start(9999);
 
     }
